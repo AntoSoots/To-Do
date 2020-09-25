@@ -107,7 +107,7 @@ function toDoList() {
         alert("Katkestasite ülesannete lisamise! Proovige uuesti!");
       } else {
         document.write(
-          '<tr><td scope="col"><input type="text" id="TomyBtn' +
+          '<tr><td><input type="text" id="TomyBtn' +
             i +
             '"></td><td><input type="button" id="myBtn' +
             i +
