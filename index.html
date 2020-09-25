@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+<html lang="et">
+    
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,27 +16,8 @@
             background-size: cover;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 300px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
         table {
             background-color: white;
-            border-collapse: collapse;
-            width: 100%;
             text-align: center;
         }
 
@@ -42,22 +25,18 @@
         td,
         th {
             border: 1px solid black;
-            height: 50;
             width: 50%
         }
 
         input[type=text] {
-            height: 100%;
-            width: 100%;
+            border: hidden;
         }
 
         input[type=button] {
-            height: 100%;
             width: 100%;
             cursor: pointer;
         }
     </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
@@ -86,7 +65,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <!-- Kell -->
-                <canvas id="canvas" height="250%">
+                <canvas id="canvas" height="300%">
                 </canvas>
 
                 <script>
@@ -179,9 +158,8 @@
                     }
                 </script>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 pt-2">
                 <!-- Ülesanded -->
-                <!-- <iframe width="611" height="650" frameborder="0" scrolling="no" src="https://login.microsoftonline.com/></iframe> -->
                 <table id="table">
                     <thead>
                         <script>
@@ -218,12 +196,18 @@
                         </script>
                     </tbody>
                     <tfoot>
-                        <button type="button" class="btn btn-dark" onclick="add()">
-                            Lisa ülesanne
-                        </button>
-                        <button type="button" class="btn btn-dark" onclick="reset()">
-                            Lähtesta
-                        </button>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-success" onclick="add()">
+                                    Lisa ülesanne
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-warning" onclick="reset()">
+                                    Lähtesta
+                                </button>
+                            </div>
+                        </div>
                     </tfoot>
                 </table>
             </div>
