@@ -1,0 +1,27 @@
+body {
+  overflow-x: hidden;
+  background-image: url(https://wonderfulengineering.com/wp-content/uploads/2014/01/HD-Technology-Wallpaper-5.jpg);
+  background-size: cover;
+}
+
+table {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+}
+
+table,
+td,
+th {
+  border: 1px solid black;
+  width: 50%;
+}
+
+input[type="text"] {
+  border: hidden;
+}
+
+input[type="button"] {
+  width: 100%;
+  cursor: pointer;
+}
