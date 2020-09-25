@@ -5,38 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='script.js'></script>
     <title>To-Do</title>
     <style>
-        body {
-            overflow-x: hidden;
-            background-image: url(https://wonderfulengineering.com/wp-content/uploads/2014/01/HD-Technology-Wallpaper-5.jpg);
-            background-size: cover;
-        }
-
-        table {
-            width: 100%;
-            background-color: white;
-            text-align: center;
-        }
-
-        table,
-        td,
-        th {
-            border: 1px solid black;
-            width: 50%
-        }
-
-        input[type=text] {
-            border: hidden;
-        }
-
-        input[type=button] {
-            width: 100%;
-            cursor: pointer;
-        }
     </style>
 </head>
 
@@ -49,16 +24,7 @@
                 <a class="weatherwidget-io" href="https://forecast7.com/en/58d3826d73/tartu/" data-label_1="TARTU"
                     data-label_2="WEATHER" data-theme="original">TARTU WEATHER</a>
                 <script>
-                    !(function (d, s, id) {
-                        var js,
-                            fjs = d.getElementsByTagName(s)[0];
-                        if (!d.getElementById(id)) {
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "https://weatherwidget.io/js/widget.min.js";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }
-                    })(document, "script", "weatherwidget-io-js");
+                    weather();   
                 </script>
             </div>
         </div>
@@ -70,197 +36,46 @@
                 </canvas>
 
                 <script>
-                    var canvas = document.getElementById("canvas");
-                    var ctx = canvas.getContext("2d");
-                    var radius = canvas.height / 2;
-                    ctx.translate(radius, radius);
-                    radius = radius * 0.9;
-                    setInterval(drawClock, 1000);
-
-                    function drawClock() {
-                        drawFace(ctx, radius);
-                        drawNumbers(ctx, radius);
-                        drawTime(ctx, radius);
-                    }
-
-                    function drawFace(ctx, radius) {
-                        var grad;
-                        ctx.beginPath();
-                        ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-                        ctx.fillStyle = "white";
-                        ctx.fill();
-                        grad = ctx.createRadialGradient(
-                            0,
-                            0,
-                            radius * 0.95,
-                            0,
-                            0,
-                            radius * 1.05
-                        );
-                        grad.addColorStop(0, "#333");
-                        grad.addColorStop(0.5, "white");
-                        grad.addColorStop(1, "#333");
-                        ctx.strokeStyle = grad;
-                        ctx.lineWidth = radius * 0.1;
-                        ctx.stroke();
-                        ctx.beginPath();
-                        ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
-                        ctx.fillStyle = "#333";
-                        ctx.fill();
-                    }
-
-                    function drawNumbers(ctx, radius) {
-                        var ang;
-                        var num;
-                        ctx.font = radius * 0.15 + "px arial";
-                        ctx.textBaseline = "middle";
-                        ctx.textAlign = "center";
-                        for (num = 1; num < 13; num++) {
-                            ang = (num * Math.PI) / 6;
-                            ctx.rotate(ang);
-                            ctx.translate(0, -radius * 0.85);
-                            ctx.rotate(-ang);
-                            ctx.fillText(num.toString(), 0, 0);
-                            ctx.rotate(ang);
-                            ctx.translate(0, radius * 0.85);
-                            ctx.rotate(-ang);
-                        }
-                    }
-
-                    function drawTime(ctx, radius) {
-                        var now = new Date();
-                        var hour = now.getHours();
-                        var minute = now.getMinutes();
-                        var second = now.getSeconds();
-                        //tund
-                        hour = hour % 12;
-                        hour =
-                            (hour * Math.PI) / 6 +
-                            (minute * Math.PI) / (6 * 60) +
-                            (second * Math.PI) / (360 * 60);
-                        drawHand(ctx, hour, radius * 0.5, radius * 0.07);
-                        //minut
-                        minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
-                        drawHand(ctx, minute, radius * 0.8, radius * 0.07);
-                        // sekund
-                        second = (second * Math.PI) / 30;
-                        drawHand(ctx, second, radius * 0.9, radius * 0.02);
-                    }
-
-                    function drawHand(ctx, pos, length, width) {
-                        ctx.beginPath();
-                        ctx.lineWidth = width;
-                        ctx.lineCap = "round";
-                        ctx.moveTo(0, 0);
-                        ctx.rotate(pos);
-                        ctx.lineTo(0, -length);
-                        ctx.stroke();
-                        ctx.rotate(-pos);
-                    }
+                    clock();
                 </script>
             </div>
             <div class="col-md-6 pt-2">
                 <!-- Ülesanded -->
                 <table id="table">
                     <thead>
-                        <script>
-                            document.write(
-                                '<tr><th colspan="2"><h1>Ülesannete list</h1></th></tr><tr><th><h2>Ülesanne<h2></th><th><h2>Teostatud<h2></th></tr>'
-                            );
-                        </script>
+                        <tr>
+                            <th colspan="2">
+                                <h1>Ülesannete list</h1>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h2>Ülesanne<h2>
+                            </th>
+                            <th>
+                                <h2>Teostatud<h2>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                         <script>
-                            var i = 1;
-                            var limit = prompt("Mitu Ülesannet sul on?");
-                            if (limit == null || limit == "") {
-                                alert("Katkestasite ülesannete sisestamise!");
-                            } else {
-                                while (i <= limit) {
-                                    var toDo = prompt("Sisesta ülesanne " + i + "!");
-                                    if (toDo == null || toDo == "") {
-                                        alert("Katkestasite ülesannete lisamise! Proovige uuesti!");
-                                    } else {
-                                        document.write(
-                                            '<tr><td><input type="text" id="TomyBtn' +
-                                            i +
-                                            '"></td><td><input type="button" id="myBtn' +
-                                            i +
-                                            '" value="Vajuta" onclick="msg(this.id)"></td></tr>'
-                                        );
-                                        document.getElementById("TomyBtn" + i).value = toDo;
-                                        i++;
-                                    }
-                                }
-                            }
-                            document.write("</tbody></table>");
+                            toDoList();
                         </script>
                     </tbody>
                     <tfoot>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-success" onclick="add()">
+                        <tr>
+                            <td><button type="button" class="btn btn-success" onclick="add()">
                                     Lisa ülesanne
-                                </button>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-warning" onclick="reset()">
+                                </button></td>
+                            <td><button type="button" class="btn btn-warning" onclick="reset()">
                                     Lähtesta
-                                </button>
-                            </div>
-                        </div>
+                                </button></td>
+                        </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
-
     </div>
-    </div>
-    <script>
-        function msg(clicked_id) {
-            var id = clicked_id;
-            var time = new Date();
-            var day = time.getDate();
-            var month = time.getMonth() + 1;
-            var year = time.getFullYear();
-            var hour = time.getHours();
-            var minute = time.getMinutes();
-            var fullTime =
-                day + "." + month + "." + year + " " + hour + ":" + minute;
-
-            var todo = document.getElementById("To" + id);
-            todo.style.textDecoration = "line-through";
-            todo.disabled = true;
-
-            var lahter = document.getElementById(id);
-            lahter.value = fullTime;
-            lahter.disabled = true;
-        }
-    </script>
-    <script>
-        function add() {
-            var toDo = prompt("Sisesta ülesanne " + i + "!");
-            if (toDo == null || toDo == "") {
-                alert("Katkestasite ülesannete lisamise!");
-            } else {
-                var x = document.getElementById("table").insertRow(-1);
-                var y = x.insertCell(0);
-                var z = x.insertCell(1);
-                y.innerHTML = '<input type="text" id="TomyBtn' + i + '">';
-                document.getElementById("TomyBtn" + i).value = toDo;
-                z.innerHTML =
-                    '<input type="button" id="myBtn' +
-                    i +
-                    '" value="Vajuta" onclick="msg(this.id)">';
-                i++;
-            }
-        }
-    </script>
-    <script>
-        function reset() {
-            location.reload();
-        }
-    </script>
 </body>
 
 </html>
